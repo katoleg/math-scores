@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, redirect
 import openpyxl
 
 app = Flask(__name__)
@@ -17,6 +17,10 @@ def read_excel(file_path):
         return [["Файл не найден"]]
     except Exception as e:
         return [[f"Ошибка чтения файла: {e}"]]
+
+@app.route("/")
+def home():
+    return redirect("/index")
 
 @app.route("/index")
 def index():

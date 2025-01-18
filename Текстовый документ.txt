@@ -11,3 +11,8 @@ git add .
 git commit -m "Update application"
 git push
 
+
+python -m venv venv
+.\venv\Scripts\activate
+pip install flask
+pip install openpyxl
