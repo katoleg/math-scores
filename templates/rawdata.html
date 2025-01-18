@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница 2</title>
+</head>
+<body>
+    <h1>Данные из файла DataRaw.xlsx</h1>
+    <a href="/index">Перейти на страницу 1</a>
+    <table border="1">
+        {% if DataRaw %}
+            {% for row in DataRaw %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell or '' }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="100%">Нет данных для отображения</td></tr>
+        {% endif %}
+    </table>
+    <br>
+    <a href="/download/2"><button>Скачать файл DataRaw.xlsx</button></a>
+    <br><br>
+    <a href="/index">Перейти на страницу 1</a>
+</body>
+</html>
