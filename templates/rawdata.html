@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Журнал выставления баллов</title>
+    <style>
+        /* Стили для заголовков */
+        .header-row {
+            font-weight: bold;
+            color: rgb(0, 17, 255);
+        }
+        td {
+            text-align: center;
+        }
+        /* Выделение каждой второй строки */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        /* Полужирный текст для первого столбца */
+        .first-column {
+            font-weight: bold;
+        }
+        /* Выделение 1, 2, 3, 4 и 9 столбцов */
+        .highlight {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h1>Журнал выставления баллов</h1>
@@ -11,16 +33,17 @@
     <table border="1">
         {% if DataRaw %}
             {% for row in DataRaw %}
-                <tr>
+                {% set first_cell = row[0] | string | trim %}
+                <tr class="{% if first_cell == 'Дата' %}header-row{% endif %}">
                     {% for cell in row %}
-                        <td align="center">{{ cell or '' }}</td>
+                        <td class="{% if loop.index0 in [0, 1, 2, 8] %}highlight{% endif %} {{ 'first-column' if loop.index0 == 0 }}">{{ cell or '' }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
         {% else %}
             <tr><td colspan="100%">Нет данных для отображения</td></tr>
         {% endif %}
-    </table>
+    </table>    
     <br>
     <a href="/download/2"><button>Скачать таблицу истории</button></a>
     <br><br>

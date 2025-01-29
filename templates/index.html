@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<link>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link></link>
     <title>Сводные данные</title>
+    <style>
+        /* Стили для заголовков */
+        .header-row {
+            font-weight: bold;
+            background-color: #e0e0e0;
+            text-align: center;
+        }
+        td {
+            text-align: center;
+        }
+        /* Выделение каждой второй строки */
+        tr:nth-child(even) {
+            background-color: #bed0e4;
+        }
+        /* Полужирный текст для первого столбца */
+        .first-column {
+            font-weight: bold;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h1>Сводные данные</h1>
@@ -12,9 +31,9 @@
     <table border="1">
         {% if DataProc %}
             {% for row in DataProc %}
-                <tr>
+                <tr class="{% if loop.first %}header-row{% endif %}">
                     {% for cell in row %}
-                        <td align="center">{{ cell or '' }}</td>
+                        <td class="{% if loop.index0 == 0 %}first-column{% endif %}">{{ cell or '' }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
@@ -24,7 +43,5 @@
     </table>
     <br>
     <a href="/download/1"><button>Скачать файл DataProc.xlsx</button></a>
-    <br><br>
-    <a href="/rawdata">Журнал выставления баллов</a>
 </body>
 </html>
